@@ -1,0 +1,78 @@
+---
+interface Props {
+  imgDesktop: string
+  imgMobile: string
+  imgAlt: string
+  Title: string
+}
+
+const { imgDesktop, imgMobile, imgAlt, Title } = Astro.props
+---
+
+<div class="creation-card">
+  <picture class="creation-picture">
+    <source srcset={imgMobile} media="(max-width: 768px)">
+    <img src={imgDesktop} alt={imgAlt}>
+  </picture>
+  <h3 class="creation-title">{Title}</h3>
+</div>
+
+<style>
+  .creation-card {
+    width: 100%;
+    height: 480px;
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .creation-card:hover {
+    & .creation-picture { opacity: .4 }
+    & .creation-title   { color: var(--black) }
+  }
+
+  .creation-picture {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    transition: opacity .12s ease;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, .6) 100%);
+    }
+  }
+
+  .creation-picture img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .creation-title {
+    position: absolute;
+    bottom: 0;
+    font-size: 2.1rem;
+    font-weight: 300;
+    padding: 3rem;
+    color: var(--white);
+    opacity: .9;
+    max-width: 13ch;
+    transition: color .12s ease
+  }
+
+  @media (width <= 768px) {
+    .creation-card {
+      width: 100%;
+      height: 270px;
+    }
+
+    .creation-title { font-size: 2.8rem }
+  }
+</style>

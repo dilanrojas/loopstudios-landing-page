@@ -1,0 +1,97 @@
+---
+import Creation from "@components/Creation.astro"
+import creationsData from "@lib/creationsData.json" with { type: "json" }
+---
+
+<section class="creations wrapper">
+
+  <header class="creations-header">
+    <h2>Our creations</h2>
+    <button><span>See all</span></button>
+  </header>
+
+  <div class="creations-grid">
+    {creationsData.map(({ images, title }) => (
+    <Creation
+        imgDesktop = {images.desktop}
+        imgMobile = {images.mobile}
+        imgAlt = {`$title`}
+        Title = {title}
+    />
+    ))}
+  </div>
+
+</section>
+
+<style>
+  .creations {
+    margin-bottom: 10rem;
+    position: relative
+  }
+
+  .creations-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5rem;
+  }
+
+  .creations-header h2 {
+    font-size: 3.2rem
+  }
+
+  .creations-header button {
+    background-color: var(--white);
+    border: 2px solid var(--vd-d-gray);
+    text-transform: uppercase;
+    padding: .6rem 3rem;
+    transition: background-color .12s ease, border .12s ease, color .12s ease;
+
+    & span { letter-spacing: 4px }
+
+    &:hover {
+      background-color: var(--black);
+      border: 2px solid var(--black);
+      color: var(--white)
+    }
+  }
+
+  .creations-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (width <= 1068px) {
+    .creations-grid {
+      grid-template-columns: repeat(2, 1fr)
+    }
+  }
+
+  @media (width <= 768px) {
+    .creations {
+      padding-bottom: 5rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .creations-grid {
+      grid-template-columns: 1fr
+    }
+
+    .creations-header {
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .creations-header button {
+      position: absolute;
+      bottom: 0;  
+    }
+  }
+</style>
+
+<style is:global>
+  .creations-grid > :nth-child(4) h3 { max-width: 8ch }
+</style>

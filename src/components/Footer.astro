@@ -1,0 +1,136 @@
+---
+import IconFacebook from "@assets/IconFacebook.astro"
+import IconTwitter from "@assets/IconTwitter.astro"
+import IconPinterest from "@assets/IconPinterest.astro"
+import IconInstagram from "@assets/IconInstagram.astro"
+---
+
+<footer class="pm-footer">
+  <div class="pm-footer-wrapper wrapper">
+
+    <img class="footer-logo" src="/logo.svg" alt="loopstudios logo">
+
+    <nav class="social-nav">
+      <ul class="social-nav-list">
+        <li><a href="#"><span><IconFacebook /></span></a></li>
+        <li><a href="#"><span><IconTwitter /></span></a></li>
+        <li><a href="#"><span><IconPinterest /></span></a></li>
+        <li><a href="#"><span><IconInstagram /></span></a></li>
+      </ul>
+    </nav>
+
+    <nav class="footer-nav">
+      <ul class="footer-nav-list">
+        <li><a href="#">About</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+    </nav>
+
+    <span class="copyright">© 2021 Loopstudios. All rights reserved.</span>
+
+  </div>
+</footer>
+
+<style>
+  .pm-footer {
+    background-color: var(--black);
+    padding-block: 2.5rem;
+    color: var(--white)
+  }
+
+  .pm-footer img {
+    width: 150px;
+  }
+
+  .pm-footer-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 1.5rem;
+    justify-content: space-between;
+    grid-template-areas:
+      'area1 area2'
+      'area3 area4'
+    ;
+  }
+
+  .footer-nav-list {
+    display: flex;
+    gap: 2rem
+  }
+
+  .footer-logo { grid-area: area1 }
+  .social-nav { grid-area: area2 }
+  .footer-nav { grid-area: area3 }
+  .copyright { grid-area: area4 }
+
+  .social-nav-list a,
+  .footer-nav-list a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 120%;
+      width: 0%;
+      height: 2px;
+      background-color: var(--white);
+      transition: width .12s ease
+    }
+  }
+
+  .footer-nav-list a:hover::before { width: 50% }
+
+  .social-nav-list a::before { top: 140% }
+  .social-nav-list a:hover::before { width: 100% }
+
+  .social-nav-list {
+    display: flex;
+    gap: 1rem;
+    justify-content: end;
+  }
+ 
+  .copyright {
+    display: flex;
+    justify-content: end;
+    color: var(--vd-d-gray)
+  }
+
+  @media (width <= 768px) {
+    .pm-footer { padding-block: 4.5rem }
+
+    .pm-footer-wrapper {
+      grid-template-columns: 1fr;
+      margin-inline: auto;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      grid-template-areas:
+        'area1'
+        'area3'
+        'area2'
+        'area4'
+      ;
+    }
+
+    .footer-logo { margin-inline: auto }
+    .social-nav-list,
+    .footer-nav-list,
+    .copyright {
+      justify-content: center;
+      margin-inline: auto;
+      width: fit-content;
+    }
+
+    .footer-nav-list {
+      flex-direction: column;
+      padding-block: 1.5rem;
+    }
+  }
+</style>
